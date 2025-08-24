@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Image Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gallery-container {
+            transition: all 0.5s ease;
+        }
+        .gallery-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .lightbox {
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .lightbox-content {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto py-12 px-4">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Image Gallery</h1>
+        <p class="text-center text-gray-600 mb-8">Explore stunning visual collections from around the world</p>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="filter-btn active px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-200 transition" data-filter="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-200 transition" data-filter="nature">Nature</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-200 transition" data-filter="architecture">Architecture</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-200 transition" data-filter="people">People</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Nature Images -->
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="nature">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc8d19af-364d-4e56-abfd-677e86aaa30f.png" alt="Majestic mountain range at sunrise with pink and orange hues in the sky" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Mountain Sunrise</h3>
+                    <p class="text-sm text-gray-600">Nature Photography</p>
+                </div>
+            </div>
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="nature">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/90f8a213-ecc9-4857-a0a5-551cd242a6f5.png" alt="Serene forest path with sunlight streaming through dense green foliage" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Forest Path</h3>
+                    <p class="text-sm text-gray-600">Nature Photography</p>
+                </div>
+            </div>
+            
+            <!-- Architecture Images -->
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="architecture">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/28474bf5-a531-405e-8ecf-76350dc1acd4.png" alt="Modern skyscraper with glass facade reflecting the city skyline at golden hour" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Urban Reflections</h3>
+                    <p class="text-sm text-gray-600">Architecture</p>
+                </div>
+            </div>
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="architecture">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf7cab9b-a6cc-4d3b-924b-b3b666ca0b9b.png" alt="Neoclassical building facade with intricate stone carvings and columns" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Classical Elegance</h3>
+                    <p class="text-sm text-gray-600">Architecture</p>
+                </div>
+            </div>
+            
+            <!-- People Images -->
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="people">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/832fb8c7-233e-4363-8250-e79b336bed3a.png" alt="Portrait of an elderly woman with deep wrinkles and kind eyes, telling a lifetime of stories" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Wise Eyes</h3>
+                    <p class="text-sm text-gray-600">Portrait</p>
+                </div>
+            </div>
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="people">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/756f892a-08c0-4936-a096-21dffb06cac3.png" alt="Silhouette of a dancer in mid-movement against a sunset background" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">The Dancer</h3>
+                    <p class="text-sm text-gray-600">Performance</p>
+                </div>
+            </div>
+            
+            <!-- Additional varied images -->
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="nature">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a60a1c46-b443-4834-a084-30afaeacda79.png" alt="Crystal clear tropical ocean with coral reef visible beneath the surface" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">Ocean Depths</h3>
+                    <p class="text-sm text-gray-600">Underwater</p>
+                </div>
+            </div>
+            <div class="gallery-item relative overflow-hidden rounded-lg shadow-md bg-white" data-category="architecture">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a806bbee-b1a2-4d2f-b407-fe59da0fff78.png" alt="Abstract architectural detail of a spiraling staircase with geometric patterns" class="w-full h-64 object-cover cursor-pointer">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800">The Spiral</h3>
+                    <p class="text-sm text-gray-600">Abstract Architecture</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-center gap-4 mb-8">
+            <button id="prev-btn" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>Previous</button>
+            <button id="next-btn" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition">Next</button>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 invisible opacity-0 p-4">
+        <div class="lightbox-content relative max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-xl transform scale-95">
+            <img id="lightbox-image" src="" alt="" class="w-full max-h-[80vh] object-contain">
+            <div class="p-4">
+                <h3 id="lightbox-title" class="text-xl font-semibold"></h3>
+                <p id="lightbox-desc" class="text-gray-600"></p>
+            </div>
+            <button id="close-lightbox" class="absolute top-2 right-2 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-800">×</button>
+            <button id="lightbox-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800">←</button>
+            <button id="lightbox-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800">→</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filter = button.dataset.filter;
+                    
+                    // Filter items
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Lightbox functionality
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDesc = document.getElementById('lightbox-desc');
+            const closeLightbox = document.getElementById('close-lightbox');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            
+            let currentIndex = 0;
+            const images = Array.from(document.querySelectorAll('.gallery-item img'));
+            
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    openLightbox(index);
+                });
+            });
+            
+            function openLightbox(index) {
+                currentIndex = index;
+                const imgElement = images[currentIndex];
+                const item = imgElement.closest('.gallery-item');
+                
+                lightboxImage.src = imgElement.src;
+                lightboxImage.alt = imgElement.alt;
+                lightboxTitle.textContent = item.querySelector('h3').textContent;
+                lightboxDesc.textContent = item.querySelector('p').textContent;
+                
+                lightbox.classList.remove('invisible', 'opacity-0');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeLightboxFunc() {
+                lightbox.classList.add('invisible', 'opacity-0');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function navigateLightbox(direction) {
+                currentIndex += direction;
+                
+                // Ensure index stays within bounds
+                if (currentIndex < 0) {
+                    currentIndex = images.length - 1;
+                } else if (currentIndex >= images.length) {
+                    currentIndex = 0;
+                }
+                
+                openLightbox(currentIndex);
+            }
+            
+            closeLightbox.addEventListener('click', closeLightboxFunc);
+            lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNext.addEventListener('click', () => navigateLightbox(1));
+            
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightboxFunc();
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('invisible')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightboxFunc();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox(1);
+                }
+            });
+            
+            // Pagination functionality (simple example cycling through all items)
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let visibleItems = Array.from(galleryItems);
+            
+            function updatePagination(offset = null) {
+                if (offset !== null) {
+                    // In a real implementation, this would handle pagination logic
+                    // For this demo, we'll just cycle through the filtered items
+                    prevBtn.disabled = offset === 0;
+                }
+                
+                // In a full implementation, we'd update which items are displayed
+                // This is simplified for the demo
+            }
+            
+            prevBtn.addEventListener('click', () => {
+                // In a real implementation, go to previous page
+                alert('Previous page would load here in a full implementation');
+                updatePagination(0); // Simplified
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                // In a real implementation, go to next page
+                alert('Next page would load here in a full implementation');
+                updatePagination(1); // Simplified
+            });
+        });
+    </script>
+</body>
+</html>
+
